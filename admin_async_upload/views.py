@@ -30,7 +30,7 @@ class UploadView(View):
     def get(self, request, *args, **kwargs):
         r = ResumableFile(self.model_upload_field, user=request.user, params=request.GET)
         if not r.chunk_exists:
-            return HttpResponse('chunk not found', status=404)
+            return HttpResponse('chunk not found', status=204)
         if r.is_complete:
             return HttpResponse(r.collect())
         return HttpResponse('chunk exists')
